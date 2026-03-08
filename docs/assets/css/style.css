@@ -1,0 +1,127 @@
+:root{
+  --maxw: 980px;
+  --text: #111;
+  --muted: #666;
+  --border: #e9e9e9;
+  --bg-alt: #fafafa;
+}
+
+*{ box-sizing: border-box; }
+body{
+  margin:0;
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height:1.55;
+  background:#fff;
+}
+
+a{ color: inherit; }
+code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+
+.container{
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.hero{ padding: 44px 0 22px; }
+.hero h1{
+  margin: 0 0 10px;
+  font-size: 2.0rem;
+  line-height: 1.2;
+}
+.authors{ margin: 0; color: var(--muted); }
+.venue{ margin: 6px 0 0; color: var(--muted); }
+
+.btnrow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top: 16px;
+}
+.btn{
+  display:inline-block;
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius: 12px;
+  text-decoration:none;
+  background:#fff;
+}
+.btn:hover{ border-color:#cfcfcf; }
+
+.teaser{
+  width:100%;
+  border-radius: 12px;
+  border:1px solid var(--border);
+  margin-top: 18px;
+}
+
+.topnav{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.topnav .container{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 14px;
+  padding: 12px 24px;
+}
+.topnav a{
+  text-decoration:none;
+  color: var(--muted);
+}
+.topnav a:hover{ color: var(--text); }
+
+.section{ padding: 28px 0; }
+.section.alt{ background: var(--bg-alt); }
+
+h2{ margin: 0 0 10px; }
+h3{ margin: 18px 0 10px; }
+
+.figure{
+  width: 100%;
+  border-radius: 12px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+.figureblock{ margin-top: 10px; }
+.caption{
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.center{ text-align:center; }
+.small{ font-size: 0.95rem; }
+.muted{ color: var(--muted); }
+
+.grid2{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+pre{
+  background:#111;
+  color:#eee;
+  padding: 14px;
+  border-radius: 12px;
+  overflow:auto;
+}
+
+.footer{ border-top:1px solid var(--border); }
+.foot{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  color: var(--muted);
+}
+
+@media (max-width: 900px){
+  .grid2{ grid-template-columns: 1fr; }
+  .hero h1{ font-size: 1.6rem; }
+}

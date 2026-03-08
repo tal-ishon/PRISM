@@ -1,0 +1,7 @@
+@article{ishon_prism_tmlr,
+  title   = {PRISM: PRIor from corpus Statistics for topic Modeling},
+  author  = {Ishon, Tal and Goldberg, Yoav and Shaham, Uri},
+  journal = {Transactions on Machine Learning Research (TMLR)},
+  year    = {2026},
+  note    = {Accepted. OpenReview:  https://openreview.net/forum?id=454v3Xbtza&noteId=nHPRY2Dqz7}
+}

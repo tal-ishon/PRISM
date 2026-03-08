@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PRISM — PRIor from corpus Statistics for topic Modeling</title>
+  <meta name="description" content="PRISM: corpus-intrinsic prior initialization for LDA from co-occurrence statistics. Accepted to TMLR." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <header class="hero" id="top">
+    <div class="container">
+      <h1>PRISM: PRIor from corpus Statistics for topic Modeling</h1>
+
+      <p class="authors">Tal Ishon · Yoav Goldberg · Uri Shaham</p>
+      <p class="venue">Accepted to <b>TMLR</b></p>
+
+      <div class="btnrow">
+        <a class="btn" href="https://openreview.net/pdf?id=454v3Xbtza" target="_blank" rel="noopener">Paper (PDF)</a>
+        <a class="btn" href="https://openreview.net/forum?id=454v3Xbtza&noteId=nHPRY2Dqz7" target="_blank" rel="noopener">OpenReview</a>
+        <a class="btn" href="https://github.com/tal-ishon/PRISM" target="_blank" rel="noopener">Code</a>
+        <a class="btn" href="#install">Install</a>
+        <a class="btn" href="#quickstart">Quickstart</a>
+        <a class="btn" href="files/bibtex.txt">BibTeX</a>
+      </div>
+
+      <img class="teaser" src="assets/img/hero.png" alt="PRISM framework overview" />
+      <p class="caption center">
+        Framework overview (replace/update with your preferred “hero” figure).
+      </p>
+    </div>
+  </header>
+
+  <nav class="topnav">
+    <div class="container">
+      <a href="#abstract">Abstract</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#wid">WID</a>
+      <a href="#install">Install</a>
+      <a href="#quickstart">Quickstart</a>
+      <a href="#citation">Citation</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="abstract" class="section">
+      <div class="container">
+        <h2>Abstract</h2>
+        <p>
+          Topic modeling seeks to uncover latent semantic structure in text, with LDA providing a foundational probabilistic framework.
+          While recent methods often incorporate external knowledge (e.g., pre-trained embeddings), such reliance limits applicability in
+          emerging or underexplored domains. We introduce <b>PRISM</b>, a corpus-intrinsic method that derives a Dirichlet parameter from
+          word co-occurrence statistics to initialize LDA without altering its generative process. Experiments on text and single cell RNA-seq
+          data show that PRISM improves topic coherence and interpretability, rivaling models that rely on external knowledge. These results
+          underscore the value of corpus-driven initialization for topic modeling in resource-constrained settings.
+        </p>
+        <p class="small muted">
+          Paper: <a href="https://openreview.net/forum?id=454v3Xbtza&noteId=nHPRY2Dqz7" target="_blank" rel="noopener">OpenReview PDF</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="method" class="section alt">
+      <div class="container">
+        <h2>Method</h2>
+        <p>
+          PRISM is a corpus-intrinsic initialization method for LDA. It constructs a PPMI-based word similarity graph from document-level
+          co-occurrence, extracts diffusion-map embeddings (anisotropic normalization), softly clusters embeddings with a GMM to obtain
+          topic-word distributions, estimates a Dirichlet prior β̂ via method-of-moments, and initializes LDA with β̂—providing prior-like
+          guidance while keeping LDA's generative process unchanged.
+        </p>
+
+        <div class="figureblock">
+          <img class="figure" src="assets/img/method.png" alt="PRISM method overview" />
+          <div class="caption">Method overview (replace with a dedicated method figure if desired).</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="section">
+      <div class="container">
+        <h2>Results</h2>
+
+        <h3>Heatmaps</h3>
+        <div class="grid2">
+          <div class="figureblock">
+            <img class="figure" src="assets/img/heatmap_prism.png" alt="PRISM heatmap" />
+            <div class="caption">PRISM heatmap (replace caption as needed).</div>
+          </div>
+          <div class="figureblock">
+            <img class="figure" src="assets/img/heatmap_fastopic.png" alt="Baseline heatmap" />
+            <div class="caption">Baseline heatmap (replace caption as needed).</div>
+          </div>
+        </div>
+
+        <h3>Top-10 words comparisons / tables</h3>
+        <div class="figureblock">
+          <img class="figure" src="assets/img/bbc_results.png" alt="BBC results table/figure" />
+          <div class="caption">Example results figure (replace with your preferred highlight figure).</div>
+        </div>
+
+        <p class="small muted">
+          Add additional heatmaps / top-10-word comparison figures by placing them under <code>docs/assets/img/</code> and inserting them here.
+        </p>
+      </div>
+    </section>
+
+    <section id="wid" class="section alt">
+      <div class="container">
+        <h2>WID: Word Intrusion Detection</h2>
+        <p>
+          Word Intrusion Detection (WID) evaluates topic interpretability by asking an evaluator to identify an out-of-place word among a topic’s top
+          words (the “intruder”). To scale this human-centric task, we use an LLM as an automated judge (following prior work), prompting it to select
+          the intruder for each topic instance.
+        </p>
+        <p class="small muted">
+          When you're ready, add your WID framework figure + WID results table to this section.
+        </p>
+      </div>
+    </section>
+
+    <section id="install" class="section">
+      <div class="container">
+        <h2>Installation</h2>
+
+        <h3>1) Clone this repo</h3>
+        <pre><code>git clone https://github.com/shaham-lab/PRISM.git
+cd PRISM</code></pre>
+
+        <h3>2) Run the setup script (downloads + patches + builds MALLET)</h3>
+        <pre><code>chmod +x setup_mallet.sh
+./setup_mallet.sh</code></pre>
+
+        <p class="muted">
+          This downloads MALLET 2.0.8 source, renames it to <code>./mallet</code>, replaces <code>./mallet/src/cc/mallet/</code> with the patched
+          directory (<code>beta_vector_patch/mallet</code>), then runs <code>ant clean &amp;&amp; ant</code>.
+        </p>
+
+        <h3>3) Verify it worked</h3>
+        <pre><code>cd mallet
+./bin/mallet --help</code></pre>
+
+        <h3>Troubleshooting (common)</h3>
+        <ul>
+          <li><code>ant: command not found</code> → install Apache Ant, then rerun the script.</li>
+          <li>Java issues → check <code>java -version</code> and <code>javac -version</code>, ensure a working JDK is installed.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="quickstart" class="section alt">
+      <div class="container">
+        <h2>Quickstart</h2>
+
+        <p class="muted">Your entry point is <code>src/main.py</code>.</p>
+
+        <p class="muted">Run from repo root:</p>
+        <pre><code>python src/main.py &lt;DATASET&gt; &lt;METRIC&gt; &lt;NUM_TOPICS&gt; &lt;NUM_ITERATIONS&gt; &lt;RUN_NUMBER&gt; &lt;SEED&gt;</code></pre>
+
+        <p class="muted">Example:</p>
+        <pre><code>python src/main.py BBC prism 5 1000 1 42</code></pre>
+
+        <p class="small muted">
+          Alternatively: <code>cd src</code> then <code>python main.py ...</code>
+        </p>
+      </div>
+    </section>
+
+    <section id="citation" class="section">
+      <div class="container">
+        <h2>Citation</h2>
+        <pre class="bibtex"><code>@article{ishon_prism_tmlr,
+  title   = {PRISM: PRIor from corpus Statistics for topic Modeling},
+  author  = {Ishon, Tal and Goldberg, Yoav and Shaham, Uri},
+  journal = {Transactions on Machine Learning Research (TMLR)},
+  year    = {2026},
+  note    = {Accepted. OpenReview:  https://openreview.net/forum?id=454v3Xbtza&noteId=nHPRY2Dqz7}
+}</code></pre>
+        <p class="small muted">
+          BibTeX file: <a href="files/bibtex.txt">docs/files/bibtex.txt</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container foot">
+      <span>PRISM · TMLR</span>
+      <span><a href="#top">Back to top</a></span>
+    </div>
+  </footer>
+</body>
+</html>
